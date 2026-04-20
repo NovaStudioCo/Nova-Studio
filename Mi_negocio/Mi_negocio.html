@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diseñamos tu sitio web | Nova Studio</title>
+  <style>
+    :root{
+      --bg:#f5f1ea;
+      --bg2:#efe7dc;
+      --line:#e4ddd2;
+      --line-strong:#ddd3c5;
+      --text:#151515;
+      --muted:#615b54;
+      --gold1:#e0c396;
+      --gold2:#b8874a;
+      --gold3:#7a542d;
+      --card:#fbf8f2;
+      --card-2:#fffdf9;
+      --shadow:0 18px 42px rgba(32,22,10,.10);
+      --shadow-strong:0 22px 55px rgba(17,17,17,.14);
+      --radius:28px;
+      --radius-sm:20px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(226,199,161,.22), transparent 26%),
+        radial-gradient(circle at 90% 70%, rgba(214,186,148,.10), transparent 22%),
+        linear-gradient(180deg,#f7f4ef 0%,#f5f1ea 100%);
+      color:var(--text);
+      line-height:1.5;
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .container{width:min(1200px,92%);margin:0 auto}
+
+    .blur-orb{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(70px);
+      opacity:.32;
+      pointer-events:none;
+      z-index:0;
+    }
+    .orb-1{ width:220px; height:220px; background:#e8cda8; top:120px; right:-50px; }
+    .orb-2{ width:180px; height:180px; background:#d8b78a; top:860px; left:-80px; opacity:.18; }
+
+
+    header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(247,244,239,.88);
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(228,221,210,.9);
+    }
+
+    .nav{
+      min-height:88px;
+      display:flex;align-items:center;justify-content:space-between;gap:20px;
+    }
+
+    .logo-wrap,.brand{display:flex;align-items:center;gap:14px;font-weight:700;letter-spacing:.12em}
+    .logo-mark,.brand-mark{
+      width:40px;height:40px;border-radius:14px;background:#191919;color:#fff;
+      display:grid;place-items:center;font-size:1rem;box-shadow:var(--shadow);
+      flex:0 0 auto;
+    }
+    .logo,.brand-name{font-size:1.05rem}
+
+    .menu{display:flex;gap:34px;align-items:center}
+    .menu a{
+      font-size:.97rem;color:#5f5a55;position:relative;transition:.2s ease;
+    }
+    .menu a::after{
+      content:"";position:absolute;left:0;bottom:-10px;width:0;height:2px;
+      background:linear-gradient(90deg,var(--gold2),var(--gold3));transition:.22s ease;
+    }
+    .menu a:hover{color:#171717}
+    .menu a:hover::after{width:100%}
+
+    .nav-right,.nav-actions{display:flex;align-items:center;gap:14px}
+    .pill{
+      border:1px solid var(--line);border-radius:999px;padding:13px 18px;
+      background:rgba(255,255,255,.55);font-size:.95rem;color:#66615c;
+      box-shadow:0 2px 0 rgba(255,255,255,.45) inset;
+      white-space:nowrap;
+    }
+
+    .btn,.btn-outline,.mini-btn,.btn-soft{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border-radius:999px;font-weight:600;transition:.2s ease;
+    }
+    .btn:hover,.btn-outline:hover,.mini-btn:hover,.btn-soft:hover{transform:translateY(-1px)}
+    .btn{
+      background:#171717;color:#fff;padding:15px 28px;
+      box-shadow:0 8px 18px rgba(17,17,17,.16), inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .btn-outline{
+      padding:15px 26px;border:1.5px solid #57514b;background:transparent;color:#1d1d1d
+    }
+    .btn-soft{
+      padding:15px 24px;background:rgba(255,255,255,.72);color:#1d1d1d;border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(17,17,17,.06);
+    }
+    .mini-btn{
+      padding:12px 18px;background:#171717;color:#fff;font-size:.95rem;
+      box-shadow:0 8px 16px rgba(17,17,17,.18)
+    }
+
+    .hero{padding:74px 0 48px;position:relative}
+    .hero-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:34px;align-items:center}
+
+    .eyebrow{
+      display:inline-flex;align-items:center;
+      padding:11px 18px;border-radius:999px;border:1px solid var(--line);
+      background:rgba(255,255,255,.62);font-size:.9rem;font-weight:700;
+      color:#756f67;letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px;
+      box-shadow:0 2px 0 rgba(255,255,255,.45) inset;
+    }
+
+    h1{
+      font-size:clamp(3.8rem,6vw,6.2rem);
+      line-height:.93;letter-spacing:-.06em;
+      max-width:690px;
+      margin-bottom:26px;
+      font-weight:800;
+      background:linear-gradient(180deg,var(--gold1) 0%, var(--gold2) 52%, var(--gold3) 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 1px 0 rgba(255,255,255,.28);
+    }
+
+    .lead{max-width:680px;font-size:1.05rem;line-height:1.52;color:var(--muted);margin-bottom:28px}
+
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:28px}
+
+    .hero-meta{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-meta span{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border-radius:999px;
+      border:1px solid var(--line);background:rgba(255,255,255,.72);color:#67615b;font-size:.94rem;
+    }
+
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+    .stat{
+      background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:22px;
+      padding:18px 18px 16px;box-shadow:0 10px 26px rgba(17,17,17,.04);
+    }
+    .stat strong{display:block;font-size:1.1rem;color:#8f673b;margin-bottom:6px}
+    .stat span{display:block;color:#6d665f;font-size:.93rem;line-height:1.35}
+
+    .scene{
+      position:relative;height:670px;border-radius:34px;
+      background:linear-gradient(180deg,rgba(255,255,255,.36),rgba(238,231,220,.32));
+    }
+
+    .frame{
+      position:absolute;border-radius:28px;background:rgba(245,239,231,.75);
+      border:1px solid rgba(218,204,188,.95);
+    }
+    .frame-outline-1{right:68px;top:140px;width:370px;height:326px}
+    .frame-outline-2{right:16px;top:240px;width:258px;height:216px;border-radius:24px;background:rgba(255,255,255,.18)}
+
+    .board{
+      position:absolute;inset:152px 34px 44px 28px;border-radius:30px;
+      background:linear-gradient(180deg,#eae2d6,#e5dbcd);
+      border:1px solid #d9cdbd;overflow:hidden;
+    }
+    .board::before{
+      content:"";position:absolute;inset:0;
+      background-image:linear-gradient(rgba(255,255,255,.18) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px);
+      background-size:32px 32px;
+      opacity:.8;
+    }
+
+    .shot{
+      position:absolute;background:#fff;border:1px solid #e9dfd3;border-radius:22px;overflow:hidden;
+      box-shadow:var(--shadow-strong);
+    }
+
+    .shot-top{
+      position:absolute;top:12px;left:14px;display:flex;gap:8px;z-index:3
+    }
+    .dot{width:10px;height:10px;border-radius:50%;background:#d8d2ca}
+
+    .hero-shot{
+      width:320px;height:192px;right:146px;top:94px;background:#111;
+      border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.18)
+    }
+    .hero-shot::before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.48)),
+        radial-gradient(circle at 55% 5%, rgba(224,194,150,.45), transparent 28%),
+        linear-gradient(135deg,#0d0c0c 0%, #2f261f 40%, #0d0c0c 100%);
+    }
+    .hero-shot .site-bar{position:absolute;top:12px;left:18px;right:18px;display:flex;justify-content:space-between;color:#ddc39d;font-size:.52rem;letter-spacing:.18em;opacity:.95;z-index:2}
+    .hero-shot .center-copy{position:absolute;left:34px;right:34px;top:62px;text-align:center;color:#e8d4b0;z-index:2}
+    .hero-shot .center-copy h4{font-family: Georgia, "Times New Roman", serif;font-size:1.8rem;font-weight:500;line-height:1.05;margin-bottom:6px}
+    .hero-shot .center-copy p{font-size:.6rem;letter-spacing:.16em}
+    .hero-shot .gold-btn{position:absolute;left:116px;bottom:34px;background:#dec08d;color:#2b2015;padding:8px 14px;border-radius:999px;font-size:.62rem;z-index:2;font-weight:700}
+
+    .info-card{
+      width:370px;right:76px;top:262px;padding:26px 28px;background:rgba(251,248,242,.96);
+    }
+    .info-card h3{font-size:1.1rem;line-height:1.15;margin-bottom:12px}
+    .info-card p{font-size:.94rem;color:#686159;line-height:1.48;margin-bottom:18px;max-width:280px}
+
+    .mobile-shot{
+      width:138px;height:206px;left:84px;bottom:26px;padding:14px;background:#faf7f2;
+    }
+    .phone{
+      position:absolute;inset:34px 24px 20px;background:linear-gradient(180deg,#f3ebdf,#fcfbf8);border-radius:20px;border:1px solid #ece1d4;
+    }
+    .phone::before{content:"";position:absolute;top:20px;left:44px;width:24px;height:24px;border-radius:8px;background:#d8c4ab;box-shadow:0 0 0 6px rgba(216,196,171,.18)}
+    .phone::after{content:"";position:absolute;left:24px;right:24px;bottom:30px;height:42px;border-radius:12px;background:linear-gradient(180deg,#d9d3cb,#f6f3ef)}
+
+    .chart-shot{
+      width:188px;height:206px;left:236px;bottom:26px;padding:18px;background:#faf7f2;
+    }
+    .chart-shot h5{font-size:.95rem;margin-bottom:16px}
+    .bars{position:absolute;left:18px;right:18px;bottom:20px;top:58px}
+    .bars .line{height:6px;border-radius:999px;background:#d9d1c7;margin-bottom:16px;opacity:.65}
+    .curve{position:absolute;left:16px;right:16px;bottom:24px;height:88px}
+    .curve svg{width:100%;height:100%}
+
+    .side-shot{
+      width:190px;height:164px;right:-4px;top:280px;background:#fff;
+    }
+    .side-shot::before{
+      content:"";position:absolute;inset:14px;border-radius:14px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.18)),
+        linear-gradient(135deg,#4a3f35,#b49a7d);
+    }
+    .side-shot::after{
+      content:"";position:absolute;left:18px;right:18px;bottom:16px;height:52px;border-radius:12px;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.08)
+    }
+
+    .floating-spark{
+      position:absolute;right:-8px;bottom:18px;font-size:74px;color:rgba(255,255,255,.78);filter:drop-shadow(0 12px 18px rgba(196,170,135,.25));
+    }
+
+    
+    .brands{
+      padding:18px 0 0;
+    }
+    .brands-track{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+    .brand-chip{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      text-align:center;
+      background:rgba(255,255,255,.56);
+      color:#6b6258;
+      font-weight:700;
+      letter-spacing:.08em;
+      box-shadow:0 10px 22px rgba(17,17,17,.04);
+    }
+
+    .section{
+      padding:88px 0;
+      position:relative;
+    }
+    .section::before{
+      content:"";position:absolute;left:0;right:0;top:0;height:1px;
+      background:linear-gradient(90deg, transparent, rgba(193,168,130,.35), transparent);
+    }
+
+    .section-title{
+      font-size:clamp(2.2rem,3vw,3.4rem);
+      line-height:1.02;
+      letter-spacing:-.045em;
+      margin-bottom:14px;
+      color:#221b16;
+    }
+
+    .section-text,.subtle{
+      max-width:760px;
+      color:var(--muted);
+      font-size:1.03rem;
+      line-height:1.65;
+      margin-bottom:34px;
+    }
+
+    .features,.pricing,.testimonials{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+
+    .card,.quote,.price-card,.step,.panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.82), rgba(251,248,242,.92));
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+    }
+
+    .card{
+      padding:30px;
+      transition:.24s ease;
+    }
+    .card:hover,.step:hover,.quote:hover,.price-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 24px 44px rgba(32,22,10,.12);
+    }
+
+    .icon-badge{
+      width:56px;height:56px;border-radius:18px;
+      display:grid;place-items:center;
+      margin-bottom:18px;font-size:1.15rem;
+      color:#5d3e1f;
+      background:linear-gradient(180deg, rgba(224,195,150,.42), rgba(184,135,74,.18));
+      border:1px solid rgba(184,135,74,.25);
+    }
+    .card h3,.step h3,.price-card h3,.quote h3{
+      font-size:1.22rem;
+      line-height:1.2;
+      margin-bottom:12px;
+      color:#211915;
+    }
+    .card p,.step p,.quote p,.price-card p{color:var(--muted)}
+
+    .process-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+
+    .step{
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .step::after{
+      content:"";position:absolute;inset:auto -30px -40px auto;width:120px;height:120px;border-radius:50%;
+      background:radial-gradient(circle, rgba(224,195,150,.22), transparent 70%);
+      pointer-events:none;
+    }
+    .step-number{
+      width:48px;height:48px;border-radius:16px;
+      display:grid;place-items:center;
+      background:linear-gradient(180deg,#1a1a1a,#35302a);color:#fff;
+      font-weight:700;margin-bottom:18px;
+      box-shadow:0 12px 24px rgba(17,17,17,.14);
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .panel{
+      padding:36px;
+      min-height:390px;
+      position:relative;
+      overflow:hidden;
+    }
+    .panel::after{
+      content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;
+      background:radial-gradient(circle, rgba(224,195,150,.18), transparent 68%);
+      pointer-events:none;
+    }
+
+    .panel.dark{
+      background:linear-gradient(180deg,#181513,#28211b);
+      color:#fff;
+      border-color:rgba(255,255,255,.08);
+      box-shadow:0 22px 48px rgba(17,17,17,.18);
+    }
+    .panel.dark .section-title{
+      color:#fff;
+      background:none;
+      -webkit-background-clip:initial;
+      background-clip:initial;
+    }
+    .panel.dark p,
+    .panel.dark .subtle,
+    .panel.dark .mini-metric span{color:#ddd3c8}
+
+    .list{margin-top:24px;display:grid;gap:14px}
+    .list div{
+      padding:14px 0;
+      border-bottom:1px solid rgba(0,0,0,.08);
+      display:flex;align-items:center;gap:12px;
+    }
+    .list div::before{
+      content:"✦";
+      color:var(--gold2);
+      font-size:.95rem;
+    }
+    .dark .list div{border-bottom:1px solid rgba(255,255,255,.1)}
+    .dark .list div::before{color:#f0c68d}
+
+    .mini-metrics{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:28px;
+    }
+    .mini-metric{
+      padding:18px;
+      border-radius:20px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.09);
+      backdrop-filter:blur(4px);
+    }
+    .mini-metric strong{
+      display:block;
+      font-size:1.55rem;
+      margin-bottom:6px;
+      color:#fff;
+    }
+    .mini-metric span{font-size:.95rem}
+
+    .pricing{align-items:stretch}
+    .price-card{
+      padding:32px;
+      position:relative;
+      overflow:hidden;
+    }
+    .price-card::after{
+      content:"";position:absolute;left:-60px;bottom:-60px;width:180px;height:180px;border-radius:50%;
+      background:radial-gradient(circle, rgba(224,195,150,.16), transparent 68%);
+      pointer-events:none;
+    }
+    .price-card.featured{
+      background:linear-gradient(180deg,#171411,#2a221b);
+      color:#fff;
+      border-color:rgba(255,255,255,.08);
+      transform:translateY(-8px);
+      box-shadow:0 26px 54px rgba(17,17,17,.22);
+    }
+    .tag{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(224,195,150,.26);
+      border:1px solid rgba(184,135,74,.24);
+      font-size:.82rem;
+      font-weight:700;
+      margin-bottom:16px;
+      color:#6a4c2a;
+    }
+    .featured .tag{
+      background:rgba(255,255,255,.10);
+      color:#fff;
+      border-color:rgba(255,255,255,.12);
+    }
+    .price{
+      font-size:3rem;
+      line-height:1;
+      margin:10px 0 14px;
+      letter-spacing:-.05em;
+      color:#231a14;
+    }
+    .price small{font-size:1rem;color:#7b7268}
+    .featured .price,
+    .featured h3{color:#fff}
+    .featured .price small,
+    .featured p,
+    .featured .price-list li{color:#ddd3c8}
+
+    .price-list{
+      list-style:none;
+      margin:24px 0 28px;
+      display:grid;
+      gap:12px;
+    }
+    .price-list li{
+      color:var(--muted);
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      line-height:1.45;
+    }
+    .price-list li::before{
+      content:"✓";
+      color:var(--gold2);
+      font-weight:700;
+    }
+    .featured .price-list li::before{color:#f0c68d}
+
+    .testimonials{gap:20px}
+    .quote{padding:28px}
+    .stars{
+      margin-bottom:16px;
+      color:var(--gold2);
+      letter-spacing:.15em;
+    }
+    .quote p{margin-bottom:22px}
+    .author strong{display:block;margin-bottom:4px}
+    .author span{color:var(--muted);font-size:.94rem}
+
+    .faq{
+      display:grid;
+      gap:14px;
+    }
+    details{
+      background:linear-gradient(180deg, rgba(255,255,255,.82), rgba(251,248,242,.92));
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:20px 22px;
+      box-shadow:0 12px 24px rgba(17,17,17,.05);
+    }
+    summary{
+      list-style:none;
+      cursor:pointer;
+      font-weight:700;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      color:#211915;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{color:var(--muted);padding-top:14px}
+
+    .cta{
+      text-align:center;
+      padding:100px 0;
+      position:relative;
+      overflow:hidden;
+    }
+    .cta-box{
+      background:linear-gradient(180deg,#171411,#2b221b);
+      color:#fff;
+      border-radius:36px;
+      padding:56px 28px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 28px 70px rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .cta-box::before,
+    .cta-box::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(240,198,141,.34), transparent 62%);
+      width:240px;
+      height:240px;
+      pointer-events:none;
+    }
+    .cta-box::before{top:-80px;left:-60px}
+    .cta-box::after{right:-60px;bottom:-80px}
+    .cta h2{
+      font-size:clamp(2.4rem,4vw,4.4rem);
+      line-height:.98;
+      margin-bottom:16px;
+      position:relative;
+      z-index:1;
+      letter-spacing:-.05em;
+    }
+    .cta p{
+      color:#ddd3c8;
+      max-width:700px;
+      margin:0 auto 28px;
+      position:relative;
+      z-index:1;
+      font-size:1.02rem;
+    }
+    .cta-actions{
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:1;
+    }
+
+    footer{
+      border-top:1px solid rgba(228,221,210,.9);
+      padding:30px 0 44px;
+      color:#6c655d;
+      font-size:.95rem;
+    }
+    .footer-grid{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+    .footer-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .footer-links a:hover{color:#1d1d1d}
+
+    @media (max-width: 1080px){
+      .menu{gap:22px}
+      .hero-grid,
+      .split{grid-template-columns:1fr}
+      .scene{height:610px}
+      .frame-outline-1{right:110px}
+      .info-card{right:118px}
+      .side-shot{right:34px}
+      .features,.pricing,.testimonials,.process-grid,.brands-track{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media (max-width: 760px){
+      .menu,.pill{display:none}
+      .nav{min-height:78px}
+      .hero{padding-top:36px}
+      h1{font-size:3.2rem}
+      .stats,
+      .features,
+      .pricing,
+      .testimonials,
+      .process-grid,
+      .mini-metrics,
+      .split,
+      .brands-track{grid-template-columns:1fr}
+      .scene{height:520px}
+      .hero-shot{width:250px;height:155px;right:70px;top:72px}
+      .hero-shot .center-copy h4{font-size:1.35rem}
+      .info-card{width:286px;right:28px;top:208px;padding:20px}
+      .mobile-shot{left:30px;bottom:24px;width:120px;height:180px}
+      .chart-shot{left:164px;bottom:24px;width:150px;height:180px}
+      .side-shot{display:none}
+      .frame-outline-1{right:24px;top:112px;width:292px;height:280px}
+      .frame-outline-2{display:none}
+      .section{padding:72px 0}
+      .panel,
+      .price-card,
+      .card,
+      .quote,
+      .step{padding:24px}
+      .cta{padding:80px 0}
+      .cta-box{padding:42px 20px}
+    }
+  </style>
+</head>
+<body>
+  <div class="blur-orb orb-1"></div>
+  <div class="blur-orb orb-2"></div>
+
+<header>
+    <div class="container nav">
+      <div class="logo-wrap">
+        <div class="logo-mark">N</div>
+        <div class="logo">NOVA STUDIO</div>
+      </div>
+
+      <nav class="menu">
+        <a href="#funciones">Funciones</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#soluciones">Soluciones</a>
+        <a href="#precios">Precios</a>
+        <a href="#faq">FAQ</a>
+        <a href="hablar_con_nosotros.html">Contacto</a>
+      </nav>
+
+      <div class="nav-right">
+        <span class="pill">✦ Diseño premium</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">NOSOTROS HACEMOS TU SITIO WEB</div>
+          <h1>Diseñamos tu página web para que tú no tengas que hacerla</h1>
+          <p class="lead">
+            En Nova Studio nos encargamos del diseño y desarrollo de tu sitio web para que tengas una presencia profesional,
+            moderna y lista para convertir visitantes en clientes, sin que tú tengas que preocuparte por la parte técnica.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn" href="#precios">Solicitar Propuesta</a>
+            <a class="btn-outline" href="ver-como-trabajamos.html">Ver cómo trabajamos</a>
+          </div>
+
+          <div class="hero-meta">
+            <span>⚡ Entrega rápida</span>
+            <span>✦ Diseño hecho por nosotros</span>
+            <span>📱 100% responsive</span>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><strong>+120</strong><span>sitios web diseñados</span></div>
+            <div class="stat"><strong>3x</strong><span>más claridad para presentar tu negocio</span></div>
+            <div class="stat"><strong>24h</strong><span>para tener una primera propuesta visual</span></div>
+          </div>
+        </div>
+
+        <div class="scene" aria-hidden="true">
+          <div class="frame frame-outline-1"></div>
+          <div class="frame frame-outline-2"></div>
+          <div class="board"></div>
+
+          <div class="shot hero-shot">
+            <div class="site-bar"><span>LOGO</span><span>ABOUT MENU BOOK</span></div>
+            <div class="center-copy">
+              <h4>LUNURIOL'S IGORA</h4>
+              <p>RESTAURANT</p>
+            </div>
+            <span class="gold-btn">BOOK A TABLE</span>
+          </div>
+
+          <div class="shot info-card">
+            <div class="shot-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <h3>Tu negocio, mejor presentado</h3>
+            <p>Diseñamos tu página web con una estructura clara, elegante y pensada para vender mejor.</p>
+            <a class="mini-btn" href="#contacto">Solicitar mi web</a>
+          </div>
+
+          <div class="shot mobile-shot">
+            <div class="shot-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="phone"></div>
+          </div>
+
+          <div class="shot chart-shot">
+            <h5>Ciberseguridad</h5>
+            <div class="bars">
+              <div class="line"></div>
+              <div class="line" style="width:82%"></div>
+              <div class="line" style="width:64%"></div>
+              <div class="line" style="width:78%"></div>
+              <div class="curve">
+                <svg viewBox="0 0 180 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 72C18 70 30 64 42 48C52 36 64 34 78 50C89 62 100 63 113 42C124 25 134 27 146 43C156 56 166 58 176 46" stroke="#b48b58" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="shot side-shot"></div>
+          <div class="floating-spark">✦</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container brands">
+      <div class="brands-track">
+        <div class="brand-chip">STUDIO</div>
+        <div class="brand-chip">ATELIER</div>
+        <div class="brand-chip">VISION</div>
+        <div class="brand-chip">NOVA</div>
+        <div class="brand-chip">BRANDLAB</div>
+      </div>
+    </div>
+
+
+  <section class="section" id="funciones">
+    <div class="container">
+      <h2 class="section-title">Nos encargamos de crear tu web de principio a fin</h2>
+      <p class="section-text">
+        No te entregamos una página para que tú la armes. Nosotros diseñamos y estructuramos tu sitio
+        para que refleje bien tu marca, se vea profesional y esté listo para captar clientes.
+      </p>
+
+      <div class="features">
+        <div class="card">
+          <div class="icon-badge">✦</div>
+          <h3>Diseño a medida</h3>
+          <p>Creamos una web con una estética moderna y profesional adaptada a tu negocio.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge">⚡</div>
+          <h3>Nosotros lo hacemos por ti</h3>
+          <p>Nos encargamos de la estructura, los textos visuales, las secciones y la presentación general del sitio.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge">📈</div>
+          <h3>Enfoque en resultados</h3>
+          <p>Diseñamos páginas pensadas para transmitir confianza, atraer clientes y generar contacto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="proceso">
+    <div class="container">
+      <h2 class="section-title">Así trabajamos tu página web</h2>
+      <p class="section-text">
+        Nuestro proceso está pensado para que tú solo nos cuentes sobre tu negocio y nosotros nos encarguemos del resto.
+      </p>
+
+      <div class="process-grid">
+        <div class="step">
+          <div class="step-number">01</div>
+          <h3>Entendemos tu negocio</h3>
+          <p>Conocemos tus servicios, tu estilo y lo que quieres transmitir con tu página web.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <h3>Diseñamos la estructura</h3>
+          <p>Organizamos las secciones, el contenido visual y el recorrido ideal para tus clientes.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <h3>Desarrollamos tu web</h3>
+          <p>Nos encargamos de construir la página para que se vea bien en celular y computadora.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">04</div>
+          <h3>Te la entregamos lista</h3>
+          <p>Recibes una web profesional, funcional y lista para mostrar tu negocio con una mejor imagen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="soluciones">
+    <div class="container split">
+      <div class="panel">
+        <h2 class="section-title" style="font-size:2.2rem;">Creamos páginas para negocios que quieren verse profesionales</h2>
+        <p class="section-text" style="margin-bottom:0;">
+          Diseñamos sitios web para marcas personales, negocios de servicios, estudios creativos,
+          emprendimientos y empresas que necesitan una presencia digital seria y atractiva.
+        </p>
+        <div class="list">
+          <div>Diseño profesional hecho por nuestro equipo</div>
+          <div>Estructura clara para presentar tus servicios</div>
+          <div>Secciones pensadas para generar confianza</div>
+          <div>Versión adaptable a móvil y escritorio</div>
+        </div>
+      </div>
+
+      <div class="panel dark">
+        <h2 class="section-title" style="font-size:2.2rem;">Tu web sin complicarte</h2>
+        <p class="subtle">
+          Tú no tienes que diseñarla ni construirla. Nosotros nos ocupamos del trabajo para que
+          tengas una página lista para mostrar tu negocio de forma profesional.
+        </p>
+        <div class="list">
+          <div>Nos encargamos del diseño</div>
+          <div>Nos encargamos de la estructura</div>
+          <div>Nos encargamos de la presentación visual</div>
+          <div>Te entregamos una web lista para usar</div>
+        </div>
+        <div class="mini-metrics">
+          <div class="mini-metric">
+            <strong>+42%</strong>
+            <span>mejor lectura visual en layouts más limpios</span>
+          </div>
+          <div class="mini-metric">
+            <strong>+28%</strong>
+            <span>más intención de clic con CTAs mejor integrados</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="precios">
+    <div class="container">
+      <h2 class="section-title">Planes para que nosotros hagamos tu página web</h2>
+      <p class="section-text">
+        Elige el paquete que mejor se adapte a tu negocio y nosotros nos encargamos de diseñar tu sitio web.
+      </p>
+
+      <div class="pricing">
+        <div class="price-card">
+          <span class="tag">Base</span>
+          <h3>Web Esencial</h3>
+          <div class="price">$750 <small>/ único pago</small></div>
+          <p>Ideal para negocios que necesitan una página profesional, clara y funcional.</p>
+          <ul class="price-list">
+            <li>1 landing page</li>
+            <li>Diseño responsive</li>
+            <li>Secciones esenciales</li>
+            <li>CTA principal</li>
+          </ul>
+          <a href="solicitud_esencial.html" class="btn-soft">Solicitar este plan</a>
+        </div>
+
+        <div class="price-card featured">
+          <span class="tag">Más elegido</span>
+          <h3>Web Premium</h3>
+          <div class="price">$1,500 <small>/ único pago</small></div>
+          <p>Una solución más completa para negocios que quieren una presencia más sólida y más enfocada en vender.</p>
+          <ul class="price-list">
+            <li>Todo lo del plan Esencial</li>
+            <li>Secciones premium extra</li>
+            <li>Testimonios y FAQ</li>
+            <li>Look visual más sólido</li>
+          </ul>
+          <a href="solicitud_premium.html" class="btn">Solicitar este plan</a>
+        </div>
+
+        <div class="price-card">
+          <span class="tag">Pro</span>
+          <h3>Web Studio</h3>
+          <div class="price">$3,000 <small>/ único pago</small></div>
+          <p>Para marcas que buscan una página con mayor personalización, presencia y estrategia visual.</p>
+          <ul class="price-list">
+            <li>Diseño más personalizado</li>
+            <li>Bloques avanzados</li>
+            <li>Mayor profundidad visual</li>
+            <li>Asesoría de estructura</li>
+          </ul>
+          <a href="solicitud_studio.html" class="btn-soft">Solicitar este plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <p class="section-text">Resolvemos las dudas más comunes antes de empezar tu proyecto.</p>
+
+      <div class="faq">
+        <details open>
+          <summary>¿Ustedes hacen toda la página web?<span>+</span></summary>
+          <p>Sí. Nosotros nos encargamos del diseño y desarrollo de tu página para que no tengas que hacerla tú mismo.</p>
+        </details>
+        <details>
+          <summary>¿La página funciona bien en celular?<span>+</span></summary>
+          <p>Sí. Tu sitio se entrega adaptado para móvil, tablet y escritorio.</p>
+        </details>
+        <details>
+          <summary>¿Puedo pedir cambios después?<span>+</span></summary>
+          <p>Sí. Podemos ajustar textos, imágenes o secciones para que la web quede alineada con tu negocio.</p>
+        </details>
+        <details>
+          <summary>¿Se puede adaptar a mi tipo de negocio?<span>+</span></summary>
+          <p>Sí. Diseñamos páginas para servicios, marcas personales, negocios locales, estudios creativos y más.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contacto">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Nosotros hacemos tu página web por ti</h2>
+        <p>
+          Si quieres una web profesional, moderna y lista para mostrar tu negocio como se merece,
+          en Nova Studio nos encargamos de diseñarla y desarrollarla para ti.
+        </p>
+        <div class="cta-actions">
+          <a href="#precios" class="btn">Quiero mi página web</a>
+          <a href="hablar_con_nosotros.html" class="btn-outline" style="border-color:#fff;color:#fff;">Hablar con nosotros</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>© 2026 Nova Studio. Diseñamos páginas web modernas, profesionales y listas para impulsar tu negocio.</div>
+      <div class="footer-links">
+        <a href="#funciones">Funciones</a>
+        <a href="#precios">Precios</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
