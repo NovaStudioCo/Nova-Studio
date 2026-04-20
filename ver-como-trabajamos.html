@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cómo trabajamos | Nova Studio</title>
+  <meta name="description" content="Conoce cómo trabajamos en Nova Studio: nuestro proceso, tiempos, enfoque y forma de desarrollar páginas web profesionales." />
+  <style>
+    :root{
+      --bg:#f7f3ed;
+      --bg-soft:#efe6da;
+      --card:#ffffff;
+      --text:#111111;
+      --muted:#626262;
+      --line:#e4dbcf;
+      --accent:#7c5a35;
+      --accent-soft:#d9b88f;
+      --dark:#151515;
+      --white:#ffffff;
+      --shadow:0 22px 60px rgba(17,17,17,.08);
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --radius-md:16px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(217,184,143,.16), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(124,90,53,.07), transparent 20%),
+        linear-gradient(180deg, #faf7f2 0%, var(--bg) 100%);
+      color:var(--text);
+      line-height:1.55;
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1180px, 92%);margin:0 auto}
+
+    .btn,
+    .btn-outline,
+    .btn-soft{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px 24px;
+      border-radius:999px;
+      font-weight:700;
+      transition:.25s ease;
+    }
+
+    .btn{
+      background:var(--dark);
+      color:var(--white);
+      border:1px solid var(--dark);
+      box-shadow:0 14px 30px rgba(17,17,17,.12);
+    }
+
+    .btn-outline{
+      background:transparent;
+      border:1px solid var(--dark);
+      color:var(--dark);
+    }
+
+    .btn-soft{
+      background:rgba(255,255,255,.72);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+
+    .btn:hover,
+    .btn-outline:hover,
+    .btn-soft:hover{transform:translateY(-2px)}
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(247,243,237,.78);
+      border-bottom:1px solid rgba(228,219,207,.75);
+    }
+
+    .nav{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .logo-wrap{display:flex;align-items:center;gap:12px}
+    .logo-mark{
+      width:40px;
+      height:40px;
+      border-radius:14px;
+      background:linear-gradient(135deg, #111, #434343);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-weight:700;
+      box-shadow:var(--shadow);
+    }
+    .logo{font-size:1rem;font-weight:700;letter-spacing:.12em}
+
+    .hero{
+      padding:84px 0 46px;
+      position:relative;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:30px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.65);
+      border:1px solid var(--line);
+      color:#4b4b4b;
+      font-size:.82rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+
+    .hero h1{
+      font-size:clamp(2.8rem, 5.8vw, 5.6rem);
+      line-height:.93;
+      letter-spacing:-.05em;
+      margin-bottom:22px;
+      max-width:700px;
+    }
+
+    .hero h1 span{display:block;color:var(--accent)}
+
+    .hero p{
+      max-width:620px;
+      color:var(--muted);
+      font-size:1.55rem;
+      margin-bottom:30px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-bottom:24px;
+    }
+
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .hero-meta span{
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.6);
+      border:1px solid var(--line);
+      font-size:.92rem;
+      color:var(--muted);
+    }
+
+    .visual-card{
+      background:linear-gradient(180deg,#f2ebe1,#e8dccb);
+      border:1px solid #ddd1c0;
+      border-radius:32px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      min-height:520px;
+    }
+
+    .visual-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px);
+      background-size:32px 32px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,1));
+      pointer-events:none;
+    }
+
+    .floating-tag{
+      position:absolute;
+      padding:12px 16px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(255,255,255,.9);
+      border-radius:18px;
+      box-shadow:0 18px 30px rgba(17,17,17,.08);
+      font-size:.9rem;
+      color:#444;
+      z-index:2;
+    }
+
+    .tag-1{top:22px;left:22px}
+    .tag-2{bottom:22px;right:22px}
+
+    .workflow-box{
+      position:relative;
+      z-index:2;
+      background:#fff;
+      border-radius:26px;
+      padding:22px;
+      max-width:430px;
+      margin:80px auto 0;
+      box-shadow:0 24px 60px rgba(0,0,0,.12);
+    }
+
+    .workflow-top{
+      display:flex;
+      gap:8px;
+      margin-bottom:16px;
+    }
+
+    .dot{width:10px;height:10px;border-radius:50%;background:#d3d3d3}
+
+    .workflow-head{
+      border-radius:18px;
+      padding:20px;
+      background:linear-gradient(180deg,#f5efe7,#eee4d7);
+      border:1px solid #e8dccd;
+      margin-bottom:14px;
+    }
+
+    .workflow-head h3{font-size:1.35rem;margin-bottom:8px}
+    .workflow-head p{font-size:.94rem;color:#666}
+
+    .mini-steps{display:grid;gap:10px}
+
+    .mini-step{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      border:1px solid #eee4d7;
+      border-radius:16px;
+      padding:14px;
+      background:#faf8f4;
+    }
+
+    .mini-step strong{
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      background:#111;
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-size:.88rem;
+      flex-shrink:0;
+    }
+
+    .section{
+      padding:84px 0;
+      border-top:1px solid rgba(228,219,207,.8);
+    }
+
+    .section-title{
+      font-size:clamp(2.1rem, 3vw, 3.2rem);
+      line-height:1;
+      letter-spacing:-.04em;
+      margin-bottom:14px;
+    }
+
+    .section-text{
+      color:var(--muted);
+      max-width:760px;
+      margin-bottom:34px;
+      font-size:1.02rem;
+    }
+
+    .cards-3,
+    .cards-4,
+    .steps-grid,
+    .faq-grid,
+    .results-grid{
+      display:grid;
+      gap:20px;
+    }
+
+    .cards-3{grid-template-columns:repeat(3,1fr)}
+    .cards-4,.steps-grid{grid-template-columns:repeat(4,1fr)}
+    .faq-grid{grid-template-columns:repeat(2,1fr)}
+    .results-grid{grid-template-columns:repeat(3,1fr)}
+
+    .card,
+    .step,
+    .faq-card,
+    .result-card,
+    .quote,
+    .panel{
+      background:rgba(255,255,255,.78);
+      border:1px solid var(--line);
+      border-radius:26px;
+      padding:28px;
+      box-shadow:0 10px 30px rgba(17,17,17,.04);
+    }
+
+    .icon{
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      margin-bottom:18px;
+      font-size:1.15rem;
+      background:linear-gradient(180deg, #f3e7d9, #ebddca);
+      border:1px solid #e3d1bc;
+    }
+
+    .card h3,
+    .step h3,
+    .faq-card h3,
+    .result-card h3,
+    .panel h3{font-size:1.18rem;margin-bottom:10px}
+
+    .card p,
+    .step p,
+    .faq-card p,
+    .result-card p,
+    .panel p,
+    .quote p{color:var(--muted)}
+
+    .step-number{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:#111;
+      color:#fff;
+      font-weight:700;
+      margin-bottom:16px;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .panel.dark{
+      background:linear-gradient(180deg,#151515,#232323);
+      color:#fff;
+      border-color:#151515;
+      box-shadow:0 24px 60px rgba(0,0,0,.16);
+    }
+
+    .panel.dark p,
+    .panel.dark li,
+    .panel.dark .metric span{color:#d7d7d7}
+
+    .list{
+      list-style:none;
+      display:grid;
+      gap:12px;
+      margin-top:20px;
+    }
+
+    .list li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color:var(--muted);
+    }
+
+    .list li::before{
+      content:"✓";
+      color:var(--accent);
+      font-weight:700;
+    }
+
+    .panel.dark .list li::before{color:#f0c68d}
+
+    .metrics{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:22px;
+    }
+
+    .metric{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .metric strong{display:block;font-size:1.5rem;margin-bottom:6px}
+    .metric span{font-size:.92rem}
+
+    .timeline{
+      display:grid;
+      gap:16px;
+      position:relative;
+    }
+
+    .timeline-item{
+      display:grid;
+      grid-template-columns:140px 1fr;
+      gap:18px;
+      align-items:start;
+      padding:22px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:rgba(255,255,255,.75);
+      box-shadow:0 8px 24px rgba(17,17,17,.03);
+    }
+
+    .timeline-day{
+      font-weight:700;
+      color:var(--accent);
+      letter-spacing:.02em;
+    }
+
+    .quotes{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .stars{color:var(--accent);letter-spacing:.15em;margin-bottom:12px}
+    .author{margin-top:18px}
+    .author strong{display:block;margin-bottom:4px}
+    .author span{color:var(--muted);font-size:.94rem}
+
+    .cta{
+      padding:94px 0;
+      text-align:center;
+    }
+
+    .cta-box{
+      background:linear-gradient(180deg,#171717,#242424);
+      color:#fff;
+      border-radius:36px;
+      padding:58px 28px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 28px 70px rgba(0,0,0,.18);
+    }
+
+    .cta-box::before,
+    .cta-box::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(240,198,141,.42), transparent 62%);
+      width:240px;
+      height:240px;
+      pointer-events:none;
+    }
+
+    .cta-box::before{top:-80px;left:-60px}
+    .cta-box::after{right:-60px;bottom:-80px}
+
+    .cta h2{
+      position:relative;
+      z-index:1;
+      font-size:clamp(2.2rem, 4vw, 4.2rem);
+      line-height:.96;
+      letter-spacing:-.04em;
+      margin-bottom:16px;
+    }
+
+    .cta p{
+      position:relative;
+      z-index:1;
+      max-width:720px;
+      margin:0 auto 28px;
+      color:#d4d4d4;
+    }
+
+    .cta-actions{
+      position:relative;
+      z-index:1;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      padding:28px 0 40px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .footer-row{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width:1080px){
+      .hero-grid,
+      .cards-3,
+      .cards-4,
+      .steps-grid,
+      .faq-grid,
+      .results-grid,
+      .quotes,
+      .split{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:780px){
+      .timeline-item{
+        grid-template-columns:1fr;
+      }
+
+      .metrics{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        padding-top:48px;
+      }
+
+      .hero-actions,
+      .cta-actions{
+        flex-direction:column;
+      }
+
+      .btn,
+      .btn-outline,
+      .btn-soft{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo-wrap">
+        <div class="logo-mark">N</div>
+        <div class="logo">NOVA STUDIO</div>
+      </div>
+      <a href="Mi_negocio.html" class="btn-outline">Volver al inicio</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Nuestro proceso</div>
+        <h1>En Nova </h1>
+          <h1>Studio
+          <span>No Diseñamos, Transformamos</span></h1>
+        <p>
+          "Tu negocio merece más que una web bonita. Creamos herramientas digitales con estrategia y diseño profesional, listas para que vendas con seguridad."
+        </p>
+        <div class="hero-actions">
+          <a href="solicitar.html" class="btn">Solicitar web</a>
+          <a href="#proceso" class="btn-soft">Ver proceso completo</a>
+        </div>
+        <div class="hero-meta">
+          <span>✦ Proceso claro</span>
+          <span>⚡ Comunicación directa</span>
+          <span>📱 Web profesional y responsive</span>
+        </div>
+      </div>
+
+      <div class="visual-card">
+        <div class="floating-tag tag-1">✦ Estrategia + diseño</div>
+        <div class="floating-tag tag-2">⚡ Entrega clara y ordenada</div>
+
+        <div class="workflow-box">
+          <div class="workflow-top">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="workflow-head">
+            <h3>Proceso Nova Studio</h3>
+            <p>Una forma de trabajo simple, profesional y enfocada en resultados reales para tu negocio.</p>
+          </div>
+          <div class="mini-steps">
+            <div class="mini-step"><strong>01</strong><span>Escuchamos tu idea y objetivos</span></div>
+            <div class="mini-step"><strong>02</strong><span>Ordenamos la estructura y el mensaje</span></div>
+            <div class="mini-step"><strong>03</strong><span>Diseñamos y desarrollamos tu web</span></div>
+            <div class="mini-step"><strong>04</strong><span>Te entregamos una versión lista para usar</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Qué puedes esperar al trabajar con nosotros</h2>
+      <p class="section-text">
+        Nuestro enfoque combina diseño visual, claridad en la comunicación y una estructura pensada para que tu página no solo se vea bien, sino que también ayude a tu negocio a generar confianza y contacto.
+      </p>
+
+      <div class="cards-3">
+        <div class="card">
+          <div class="icon">✦</div>
+          <h3>Dirección clara</h3>
+          <p>Te guiamos en el proceso para que no tengas que improvisar ni adivinar qué debe llevar tu página.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h3>Proceso ordenado</h3>
+          <p>Definimos prioridades, estructura y siguientes pasos para que el proyecto avance con claridad.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📈</div>
+          <h3>Enfoque profesional</h3>
+          <p>Buscamos que la web transmita valor, confianza y una imagen más seria de tu negocio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="proceso">
+    <div class="container">
+      <h2 class="section-title">Nuestro proceso paso a paso</h2>
+      <p class="section-text">
+        Así trabajamos normalmente en un proyecto web para que todo tenga coherencia, se vea profesional y llegue a buen resultado.
+      </p>
+
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-number">01</div>
+          <h3>Brief inicial</h3>
+          <p>Recibimos tu información, entendemos tu negocio y revisamos qué necesitas comunicar en la web.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <h3>Estructura</h3>
+          <p>Definimos secciones, jerarquía, botones y recorrido del usuario para que el sitio tenga sentido.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <h3>Diseño y desarrollo</h3>
+          <p>Construimos una propuesta visual elegante y la llevamos a una versión funcional y adaptable.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">04</div>
+          <h3>Entrega y ajustes</h3>
+          <p>Te mostramos la web, revisamos detalles finales y dejamos el proyecto listo para avanzar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="panel">
+        <h3>Lo que necesitamos de tu lado</h3>
+        <p>Queremos que el proceso sea ligero para ti, pero hay algunas cosas que nos ayudan a trabajar mejor desde el inicio.</p>
+        <ul class="list">
+          <li>Información sobre tu negocio y tus servicios</li>
+          <li>Referencias visuales o estilos que te gusten</li>
+          <li>Textos, ideas o puntos clave que quieras destacar</li>
+          <li>Objetivo principal de la página web</li>
+        </ul>
+      </div>
+
+      <div class="panel dark">
+        <h3>Lo que hacemos nosotros</h3>
+        <p>Nos encargamos de transformar esa información en una página web ordenada, profesional y alineada con tu marca.</p>
+        <ul class="list">
+          <li>Organizamos el contenido y la estructura</li>
+          <li>Diseñamos una presentación más premium</li>
+          <li>Desarrollamos una web funcional y responsive</li>
+          <li>Te entregamos una propuesta lista para avanzar</li>
+        </ul>
+
+        <div class="metrics">
+          <div class="metric">
+            <strong>1 proceso</strong>
+            <span>claro y fácil de seguir</span>
+          </div>
+          <div class="metric">
+            <strong>100%</strong>
+            <span>enfoque en presentación profesional</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Cómo suele avanzar un proyecto</h2>
+      <p class="section-text">
+        Cada proyecto puede variar, pero esta línea general te ayuda a entender cómo se mueve el trabajo desde la solicitud hasta la entrega.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-day">Paso 1</div>
+          <div>
+            <h3>Nos envías tu solicitud</h3>
+            <p>Recibimos tus datos, revisamos lo que necesitas y entendemos el tipo de web que quieres desarrollar.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-day">Paso 2</div>
+          <div>
+            <h3>Definimos la propuesta</h3>
+            <p>Ordenamos la información, planteamos el enfoque del sitio y alineamos expectativas antes de construir.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-day">Paso 3</div>
+          <div>
+            <h3>Diseñamos la experiencia visual</h3>
+            <p>Trabajamos secciones, jerarquía, estilo y presentación para que la web se vea sólida y profesional.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-day">Paso 4</div>
+          <div>
+            <h3>Entregamos una versión lista</h3>
+            <p>Te mostramos el resultado, ajustamos detalles finales y dejamos una base clara para lanzamiento o siguientes pasos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Resultados que buscamos con cada web</h2>
+      <p class="section-text">
+        Más allá del diseño, queremos que la página te ayude a comunicar mejor, verte más profesional y hacer más fácil el contacto con tus clientes.
+      </p>
+
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="icon">🧭</div>
+          <h3>Más claridad</h3>
+          <p>Que el visitante entienda rápido qué haces, cómo trabajas y por qué debería confiar en ti.</p>
+        </div>
+        <div class="result-card">
+          <div class="icon">💼</div>
+          <h3>Mejor percepción</h3>
+          <p>Que tu marca se vea más seria, más cuidada y más lista para competir de forma profesional.</p>
+        </div>
+        <div class="result-card">
+          <div class="icon">📩</div>
+          <h3>Más intención de contacto</h3>
+          <p>Que la web invite al usuario a escribirte, pedir información o iniciar una conversación contigo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Preguntas comunes sobre cómo trabajamos</h2>
+      <p class="section-text">
+        Estas son algunas dudas frecuentes antes de empezar un proyecto web con nosotros.
+      </p>
+
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h3>¿Necesito tener todo definido antes de escribirles?</h3>
+          <p>No. Puedes llegar con una idea general y nosotros te ayudamos a ordenar el proyecto.</p>
+        </div>
+        <div class="faq-card">
+          <h3>¿Ustedes también me ayudan con la estructura?</h3>
+          <p>Sí. No solo diseñamos, también proponemos una mejor forma de presentar tu contenido.</p>
+        </div>
+        <div class="faq-card">
+          <h3>¿Puedo pedir cambios o ajustes?</h3>
+          <p>Sí. El proceso contempla revisión y pulido para que la web se acerque mejor a lo que necesitas.</p>
+        </div>
+        <div class="faq-card">
+          <h3>¿Trabajan con diferentes tipos de negocio?</h3>
+          <p>Sí. Adaptamos el enfoque según tu marca, sector, objetivos y tipo de cliente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Lo que valoran nuestros clientes</h2>
+      <p class="section-text">
+        Normalmente lo que más se aprecia no es solo el resultado visual, sino la claridad del proceso y la tranquilidad de sentir que el proyecto va en buenas manos.
+      </p>
+
+      <div class="quotes">
+        <div class="quote">
+          <div class="stars">★★★★★</div>
+          <p>“Me gustó que no fue solo diseño. También me ayudaron a entender mejor cómo debía presentar mi negocio.”</p>
+          <div class="author">
+            <strong>Camila R.</strong>
+            <span>Marca personal</span>
+          </div>
+        </div>
+        <div class="quote">
+          <div class="stars">★★★★★</div>
+          <p>“El proceso fue claro desde el inicio. Se sintió ordenado, profesional y muy bien pensado.”</p>
+          <div class="author">
+            <strong>Estudio Norte</strong>
+            <span>Servicios creativos</span>
+          </div>
+        </div>
+        <div class="quote">
+          <div class="stars">★★★★★</div>
+          <p>“Lo mejor fue sentir que no tenía que resolver todo yo. Ellos guiaron el proyecto y eso dio mucha confianza.”</p>
+          <div class="author">
+            <strong>Daniel M.</strong>
+            <span>Consultor digital</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2>¿Te gusta cómo trabajamos?<br />Hagamos tu página web</h2>
+        <p>
+          Si buscas una web profesional, bien estructurada y hecha con un proceso claro, el siguiente paso es contarnos sobre tu proyecto y preparar tu solicitud.
+        </p>
+        <div class="cta-actions">
+          <a href="solicitar.html" class="btn">Solicitar web</a>
+          <a href="index.html" class="btn-outline" style="border-color:#fff;color:#fff;">Volver al inicio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-row">
+      <div>© 2026 Nova Studio. Proceso claro, diseño profesional y páginas web pensadas para vender.</div>
+    </div>
+  </footer>
+</body>
+</html>
